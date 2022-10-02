@@ -1,11 +1,14 @@
 import React from 'react';
 import Card from 'react-bootstrap/Card';
 import ProgressBar from 'react-bootstrap/ProgressBar';
+import { useNavigate } from 'react-router-dom';
 
-const ListRaiseFund = ({dummyImg, title, desc, fund}) => {
+
+const ListRaiseFund = ({id,thumbnail, title, desc, fund}) => {
+    let navigate = useNavigate()
     return (
         <Card className='rounded border-0 bg-light text-dark'>
-        <Card.Img variant="top" src={dummyImg} />
+        <Card.Img variant="top" src={'http://localhost:5000/uploads/'+thumbnail} />
         <Card.Body>
             <Card.Title>{title}</Card.Title>
             <p className='text-muted'>{desc}</p>
@@ -17,7 +20,7 @@ const ListRaiseFund = ({dummyImg, title, desc, fund}) => {
                     Rp {fund}
                 </div>
                 <div>
-                    <button className="text-light bg-danger fw-bold" style={{padding:"5px 30px 5px", border:"none", borderRadius:"8px", marginLeft:"120px"}}>
+                    <button onClick={()=> navigate(`/detail-donation/${id}`)} className="text-light bg-danger fw-bold" style={{padding:"5px 30px 5px", border:"none", borderRadius:"8px", marginLeft:"120px"}}>
                         View Fund
                     </button>
                 </div>
