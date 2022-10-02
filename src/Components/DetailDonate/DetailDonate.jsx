@@ -19,10 +19,10 @@ const DetailDonate = () => {
   const [showDonate, setShowDonate] = useState(false)
   const [state] = useContext(UserContext)
   let navigate = useNavigate()
-  const {id} = useParams()
+  const {fund_id} = useParams()
 
   let {data: funds} = useQuery("detailCache",async () => {
-    const response = await API.get("/fund/" + id)
+    const response = await API.get("/fund/" + fund_id)
     console.log("ini response detail donate",response)
 
     return response.data.data
@@ -37,7 +37,7 @@ const DetailDonate = () => {
     })
     navigate("/")
     if(state.isLogin == true) {
-      navigate(`/detail-donation/${id}`)
+      navigate(`/detail-donation/${fund_id}`)
     }
     // setLoginShow(true)
   },[state])
@@ -67,7 +67,7 @@ const DetailDonate = () => {
           >
             Donate
           </Button>
-          <ModalDonate showDonate={showDonate} setShowDonate={setShowDonate}/>
+          <ModalDonate showDonate={showDonate} setShowDonate={setShowDonate} funds={funds}/>
         </div>
       </div>
       <div style={{ padding: "0rem 6rem" }}>

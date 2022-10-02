@@ -7,9 +7,11 @@ import { useNavigate } from "react-router-dom";
 import { useMutation } from "react-query";
 import API from "../../config/api";
 
-const ModalDonate = ({ showDonate, setShowDonate }) => {
+const ModalDonate = ({ showDonate, setShowDonate, funds }) => {
   const [state, dispatch] = useContext(UserContext);
   let navigate = useNavigate();
+
+  console.log("zzzzzzzzzzzz", funds);
 
   const [form, setForm] = useState({
     donateAmount: null,
@@ -20,7 +22,9 @@ const ModalDonate = ({ showDonate, setShowDonate }) => {
   const handleChange = (e) => {
       setForm((prevData) => ({
         ...prevData,
-        [e.target.name]: e.target.value
+        [e.target.name]: e.target.value,
+        fund_id : funds?.id,
+
       }))
   }
 

@@ -61,7 +61,7 @@ function App() {
     <Routes>
       <Route path="/" element={<LandingPage />} />
       <Route path="/profile" element={<ProfilePage />} />
-      <Route path="/detail-donation/:id" element={<DetailDonatePage />} />
+      <Route path="/detail-donation/:fund_id" element={<DetailDonatePage />} />
       <Route path="/raisefund" element={<MakeRaiseFund />} />
       <Route path="/add-raisefund" element={<AddRaiseFundPage />} />
     </Routes>
