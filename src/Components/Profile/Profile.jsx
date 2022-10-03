@@ -7,10 +7,12 @@ import { useContext } from "react";
 import { UserContext } from "../../context/userContext";
 import { useQuery } from "react-query";
 import API from "../../config/api";
+import moment from "moment";
+import convertRupiah from "rupiah-format"
 
 const Profile = () => {
   const [state] = useContext(UserContext);
-  const [user, setUser] = useState(null)
+  const [user, setUser] = useState(null);
 
   const [transaction, setTransaction] = useState([]);
 
@@ -29,8 +31,8 @@ const Profile = () => {
 
     const resultResponse = transaction.data.data.transaction;
     // const resultResponseFund = transaction.data.data.transaction.fund
-    setUser(transaction.data?.data)
-    setTransaction(resultResponse)
+    setUser(transaction.data?.data);
+    setTransaction(resultResponse);
     console.log("ini result response transaction", resultResponse);
     // console.log("ini result response fund", resultResponseFund);
 
@@ -59,33 +61,33 @@ const Profile = () => {
       </div>
       <div className="section-2">
         <div className="history-donation fw-bold">History Donation</div>
-          {transactions?.map((item, index) => {
-            return (
-        <div  key={index}>
-            <Card className="mb-3">
-              <Card.Body>
-                <Card.Title className="fw-bold">
-                  {item?.fund?.title}
-                </Card.Title>
-                <Card.Text>
-                  <p className="mt-3">
-                    {" "}
-                    {item?.startdate}
-                  </p>
-                </Card.Text>
-                <Card.Text
-                  className="d-flex mt-3 align-center"
-                  style={{ width: "100%" }}
-                >
-                  <div className="mt-2 text-danger">Total: {item?.donateAmount}</div>
-                  <div>
-                    <p className="status text-success fw-bolder">Finished</p>
-                  </div>
-                </Card.Text>
-              </Card.Body>
-            </Card>
-        </div>
-         )})}
+        {transactions?.map((item, index) => {
+          return (
+            <div key={index}>
+              <Card className="mb-3">
+                <Card.Body>
+                  <Card.Title className="fw-bold">
+                    {item?.fund?.title}
+                  </Card.Title>
+                  <Card.Text>
+                    <p className="mt-3"> {moment(item?.startdate).format("dddd, DD MMMM YYYY")}</p>
+                  </Card.Text>
+                  <Card.Text
+                    className="d-flex mt-3 align-center"
+                    style={{ width: "100%" }}
+                  >
+                    <div className="mt-2 text-danger">
+                      Total: {convertRupiah.convert(item?.donateAmount)}
+                    </div>
+                    <div>
+                      <p className="status text-success fw-bolder">Finished</p>
+                    </div>
+                  </Card.Text>
+                </Card.Body>
+              </Card>
+            </div>
+          );
+        })}
       </div>
     </div>
   );

@@ -11,7 +11,7 @@ const ModalDonate = ({ showDonate, setShowDonate, funds }) => {
   const [state, dispatch] = useContext(UserContext);
   let navigate = useNavigate();
 
-  console.log("zzzzzzzzzzzz", funds);
+  // console.log("zzzzzzzzzzzz", funds);
 
   const [form, setForm] = useState({
     donateAmount: null,
