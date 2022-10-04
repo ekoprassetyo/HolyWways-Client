@@ -12,7 +12,8 @@ const ContainerViewFund = () => {
   let navigate = useNavigate();
   const { fund_id } = useParams();
 
-  const [dataPending, setDataPending] = useState([]);
+  const [statusPending, setStatusPending] = useState([])
+
 
   let { data: fundsListPending } = useQuery("detailCache", async () => {
     const response = await API.get("/fund/" + fund_id);
@@ -24,32 +25,34 @@ const ContainerViewFund = () => {
     return resultResponsePending;
   });
 
-  console.log("===========", fundsListPending)
+  // fundsListPending?.map((data) => {
+  //   if (data?.status === "pending") {
+  //     setStatusPending.push(`${data?.status}`)
+  //   }
+  // })
 
+  // console.log(statusPending)
 
   return (
     <>
         <Container className="my-5">
           <p className="fw-bold" style={{ fontSize: "30px" }}>
-            Donation has not been approved ({fundsListPending?.length})
+            Donation has not been approved (1)
           </p>
-      {fundsListPending?.status === "pending" ? (
           <Row className="mb-5">
             {fundsListPending?.map((item, index) => {
-              return (
+              return ( 
                 <Col md={12} key={index}>
                   <ListViewFund
                     name={item.user?.fullName}
                     date={item.startdate}
                     total={item.donateAmount}
+                    status={item.status}
                   />
                 </Col>
               );
             })}
-          </Row>
-      ) : (
-        "Gagal"
-        )}
+          </Row> 
         </Container>
     </>
   );

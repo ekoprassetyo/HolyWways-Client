@@ -25,7 +25,7 @@ const Profile = () => {
     };
 
     const response = await API.get(`/check-auth`, config);
-    console.log("response transaction", response);
+    // console.log("response transaction", response);
 
     const transaction = await API.get(`/user/${response.data?.data?.id}`);
 
@@ -80,7 +80,7 @@ const Profile = () => {
                       Total: {convertRupiah.convert(item?.donateAmount)}
                     </div>
                     <div>
-                      <p className="status text-success fw-bolder">Finished</p>
+                      <p className={item?.status === "success" ? "status text-success" : "status text-warning bg-light fw-bold" }>{item?.status === "success" ? "Finished" : "Pending"}</p>
                     </div>
                   </Card.Text>
                 </Card.Body>

@@ -1,14 +1,15 @@
 import React from "react";
 import { Modal, Form, Button, Table } from "react-bootstrap";
 import buktiTF from "../../assets/images/bukti.png";
+import moment from 'moment'
+import convertRupiah from 'rupiah-format'
 
-const ModalView = ({ showView, setShowView }) => {
+const ModalView = ({ showView, setShowView, name, date, total, status }) => {
   return (
     <>
-      <Modal show={showView} onHide={() => setShowView(false)}>
+      <Modal show={showView} onHide={() => setShowView(false)} size="lg" aria-labelledby="contained-modal-title-vcenter" centered >
         <Modal.Body>
-          <Form>
-            <Form.Group
+            {/* <Form.Group
               className="mb-3 mt-3"
               controlId="exampleForm.ControlInput1"
             >
@@ -20,7 +21,7 @@ const ModalView = ({ showView, setShowView }) => {
                 className="bg-light"
                 autoFocus
               />
-            </Form.Group>
+            </Form.Group> */}
             <Table striped bordered hover size="sm">
               <thead>
                 <tr>
@@ -32,18 +33,17 @@ const ModalView = ({ showView, setShowView }) => {
               </thead>
               <tbody>
                 <tr>                  
-                  <td>Ekoy</td>
-                  <td>Rp. 400.0000</td>
-                  <td>30-09-2022</td>
-                  <td>Pending</td>
+                  <td>{name}</td>
+                  <td>{convertRupiah.convert(total)}</td>
+                  <td>{moment(date).format("ddd, DD MMM YYYY  ")}</td>
+                  <td className="text-warning">{status}</td>
                 </tr>
               </tbody>
             </Table>
-          </Form>
         </Modal.Body>
         <Modal.Footer className="justify-content-center align-center">
-          <Button style={{ width: "100%" }} variant="danger" onClick="#">
-            Approve
+          <Button style={{ width: "100%" }} variant="danger" onClick={() => setShowView(false)}>
+            Close
           </Button>
         </Modal.Footer>
       </Modal>

@@ -19,6 +19,8 @@ import convertRupiah from "rupiah-format"
 const DetailDonate = () => {
   const [showDonate, setShowDonate] = useState(false);
   const [state] = useContext(UserContext);
+  const [totalFund, setTotalFund] = useState(0)
+
   let navigate = useNavigate();
   const { fund_id } = useParams();
 
@@ -40,14 +42,9 @@ const DetailDonate = () => {
       
       navigate("/");
       }
-    //   if (state.isLogin == true) {
-    //     navigate(`/detail-donation/${fund_id}`);
-    // }
-    
-    // setLoginShow(true)
   }, []);
 
-  console.log(state.isLogin, "ini state")
+  // console.log(state.isLogin, "ini state")
   
 
   // console.log("ini funds :", funds?.[0])
@@ -59,7 +56,9 @@ const DetailDonate = () => {
         <div style={{}}>
           <img
             src={`http://localhost:5000/uploads/${funds?.thumbnail}`}
-            width="500px"
+            height="300px"
+            width="400px"
+            style={{objectFit:"cover"}}
             className="rounded"
           />
         </div>

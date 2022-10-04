@@ -14,7 +14,7 @@ const ModalDonate = ({ showDonate, setShowDonate, funds }) => {
   // console.log("zzzzzzzzzzzz", funds);
 
   const [form, setForm] = useState({
-    donateAmount: null,
+    donateAmount: 0,
   });
 
   const { donateAmount } = form;
